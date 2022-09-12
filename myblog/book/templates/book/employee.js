@@ -1,0 +1,1 @@
+const employee={template:'<h1>This Employee page</h1>'}

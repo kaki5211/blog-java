@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <!-- VUETIFY -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+  
+</head>
+
+
+<body>
+
+  
+  <body>
+    <div class="wrap">
+      <div class="sidebar">
+        <ul class="sidebar_list">
+          <li><a href="#about">ABOUT</a></li>
+          <li><a href="#blog">BLOG</a></li>
+          <li><a href="#news">NEWS</a></li>
+          <li><a href="#contact">CONTACT</a></li>
+        </ul>
+      </div>
+      <div class="main">
+        <div id="about">ABOUT</div>
+        <div id="blog">BLOG</div>
+        <div id="news">NEWS</div>
+        <div id="contact">CONTACT</div>
+      </div>
+    </div>
+    <footer>
+      
+    </footer>
+  </body>
+
+
+
+    {% with ''|center:100 as range %}
+    {% for _ in range %}
+  
+    <p>ああ</p>
+  
+  
+  
+    {% endfor %}
+    {% endwith %}   
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+
+
+
+
+    {% comment %} <script>
+      new Vue({
+        el: '#app',
+        vuetify: new Vuetify(),
+        data: () => ({
+          collapseOnScroll: true,
+        }),
+
+     })
+    </script> {% endcomment %}
+
+
+    <script>
+      $(function() {
+        var $fixElement = $('.sidebar_list'); // 追従する要素
+        var $sidebar = $('.sidebar'); 
+        var $sidebarHeight = $sidebar.offset().top + $sidebar.height();
+        console.log($sidebar.height());
+        console.log($sidebar.offset().top);
+        var baseFixPoint = $fixElement.offset().top; // 追従する要素の初期位置
+        var fixClass = 'is_fixed'; // 追従時に付与するclass
+        var absoClass = 'is_absolute'; // 追従時に付与するclass
+      
+        // 要素が追従する処理
+        function fixFunction() {
+            var windowScrolltop = $(window).scrollTop();
+            console.log(windowScrolltop);
+            // スクロールが初期位置を通過しているとき
+            if(windowScrolltop >= $sidebarHeight - $fixElement.height()){
+              $fixElement.addClass(absoClass);
+              $fixElement.removeClass(fixClass);
+            } else if(windowScrolltop >= baseFixPoint) {
+                $fixElement.addClass(fixClass);
+                $fixElement.removeClass(absoClass);
+            } else {
+                $fixElement.removeClass(fixClass);
+                $fixElement.removeClass(absoClass);
+            }
+        }
+      
+        $(window).on('load scroll', function() {
+            fixFunction();
+        });
+      });
+      
+      
+      $(function() {
+        // ナビゲーションのリンクを指定
+       var navLink = $('ul.sidebar_list li a');
+      
+        // 各コンテンツのページ上部からの開始位置と終了位置を配列に格納しておく
+       var contentsArr = new Array();
+      for (var i = 0; i < navLink.length; i++) {
+           // コンテンツのIDを取得
+          var targetContents = navLink.eq(i).attr('href');
+          // ページ内リンクでないナビゲーションが含まれている場合は除外する
+          if(targetContents.charAt(0) == '#') {
+             // ページ上部からコンテンツの開始位置までの距離を取得
+                var targetContentsTop = $(targetContents).offset().top;
+             // ページ上部からコンテンツの終了位置までの距離を取得
+                var targetContentsBottom = targetContentsTop + $(targetContents).outerHeight(true) - 1;
+             // 配列に格納
+                contentsArr[i] = [targetContentsTop, targetContentsBottom]
+          }
+       };
+      
+      // 現在地をチェックする
+       function currentCheck() {
+           // 現在のスクロール位置を取得
+            var windowScrolltop = $(window).scrollTop();
+            for (var i = 0; i < contentsArr.length; i++) {
+               // 現在のスクロール位置が、配列に格納した開始位置と終了位置の間にあるものを調べる
+              if(contentsArr[i][0] <= windowScrolltop && contentsArr[i][1] >= windowScrolltop) {
+                    // 開始位置と終了位置の間にある場合、ナビゲーションにclass="current"をつける
+                   navLink.removeClass('action');
+                   navLink.eq(i).addClass('action');
+                    i == contentsArr.length;
+                }
+           };
+      }
+      
+       // ページ読み込み時とスクロール時に、現在地をチェックする
+      $(window).on('load scroll', function() {
+          currentCheck();
+      });
+      
+      // ナビゲーションをクリックした時のスムーズスクロール
+        navLink.click(function() {
+          $('html,body').animate({
+              scrollTop: $($(this).attr('href')).offset().top
+           }, 300);
+            return false;
+       })
+      });
+    </script>
+
+
+{% comment %} 
+
+
+  <script>
+    const { createApp } = Vue
+    const { createVuetify } = Vuetify
+    
+    const vuetify = createVuetify()
+    
+    const app = createApp({
+      template: '#app-template',
+    }).use(vuetify).mount('#app')
+  </script> {% endcomment %}
+
+
+
+
+
+
+<style>
+  HTML CSS JS Result Skip Results Iframe
+  body{
+    margin: 0;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #555;
+  }         
+  
+  #about{
+    width: 100%;
+    height: 800px;
+    background-color: #94b7e6;
+  }
+  #blog{
+    width: 100%;
+    height: 800px;
+    background-color: #bdbdbd;
+  }
+  #news{
+    width: 100%;
+    height: 800px;
+    background-color: #f0d7a1;
+  }
+  #contact{
+    width: 100%;
+    height: 800px;
+    background-color: #ff9898;
+  }
+  
+  .wrap{
+    display: flex;
+  }
+  .sidebar{
+    background-color: beige;
+    width: 25%;
+    position: relative;
+  }
+  .sidebar_list{
+    padding: 0;
+  }
+  .sidebar li{
+    background-color: #ffffff;
+    margin: 10px 0;
+  }
+  .main{
+    width: 75%;
+  }
+  
+  .action {
+    border-left: 5px solid #000000;
+  }
+  
+  .is_fixed {
+    position: fixed;
+    top: 0;
+    width: 25%;
+  }
+  
+  .is_absolute {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  footer{
+    width: 100%;
+    height: 600px;
+    background-color: #daffbc;
+  }
+  
+  Resources
+#under-btn {
+  display: none;
+  position: relative;
+  z-index: 9000;
+  width: 100%;
+}
+</style>
+
+
+
+</html>

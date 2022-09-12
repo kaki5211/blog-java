@@ -1,0 +1,1 @@
+python manage.py ping_google /book/sitemap.xml

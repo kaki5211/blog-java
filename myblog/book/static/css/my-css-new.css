@@ -1,0 +1,34 @@
+.d-inline-block {
+  display: inline-block !important;
+}
+
+
+.text-decoration-none {
+  text-decoration: none !important;
+}
+
+
+.px-10 {
+  padding-left: 1.0rem !important;
+  padding-right: 1.0rem !important;
+}
+
+.rounded-025 {
+  border-radius: 0.25rem !important;
+}
+.rounded-05 {
+  border-radius: 0.5rem !important;
+}
+
+
+.my-border-1-gray {
+  border: 1px solid #9A9 !important;
+}
+.my-border-1 {
+  border: 1px solid #455045 !important;
+}
+
+.my-px-container {
+  padding-right: 5 !important;
+  padding-left: 5 !important;
+}
