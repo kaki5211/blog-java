@@ -33,7 +33,7 @@ if pf == 'Windows':
 
     ALLOWED_HOSTS = ["*"]
 
-elif pf == 'Windows2':
+else:
 
     DEBUG = False
 
